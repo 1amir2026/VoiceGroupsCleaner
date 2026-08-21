@@ -43,50 +43,56 @@ Bukkit-compatibility mod like Cardboard, which isn't officially supported here.
 
 i am **1amir2026**. ( who actually started this ) 
 
-<h3 align="center">🔗 Our Links</h3>
+<h3 align="center">🔗 My Links</h3>
 
 <div align="center">
 
-  <a href="https://t.me/BloxyDesign">
-    <img
-      src="https://cdn.simpleicons.org/telegram/26A5E4"
-      width="50"
-      height="50"
-      alt="BloxyDesign"
-    >
-  </a>
+  <table>
+    <tr>
+      <td align="center">
+        <a href="https://t.me/BloxyDesign">
+          <img
+            src="https://cdn.simpleicons.org/telegram/FFFFFF"
+            width="50"
+            height="50"
+            alt="Designer"
+          >
+        </a>
+        <br>
+        <sub>Designer • @BloxyDesign</sub>
+      </td>
 
-  &nbsp;&nbsp;&nbsp;&nbsp;
+      <td width="40"></td>
 
-  <a href="https://github.com/1amir2026">
-    <img
-      src="https://cdn.simpleicons.org/github/181717"
-      width="50"
-      height="50"
-      alt="GitHub"
-    >
-  </a>
+      <td align="center">
+        <a href="https://github.com/1amir2026">
+          <img
+            src="https://cdn.simpleicons.org/github/FFFFFF"
+            width="50"
+            height="50"
+            alt="GitHub"
+          >
+        </a>
+        <br>
+        <sub>GitHub • 1amir2026</sub>
+      </td>
 
-  &nbsp;&nbsp;&nbsp;&nbsp;
+      <td width="40"></td>
 
-  <a href="https://t.me/ItzAmiRxD">
-    <img
-      src="https://cdn.simpleicons.org/telegram/26A5E4"
-      width="50"
-      height="50"
-      alt="Telegram"
-    >
-  </a>
-
-  <br>
-
-  <sub>
-    <a href="https://t.me/BloxyDesign">Designer • @BloxyDesign</a>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="https://github.com/1amir2026">GitHub • 1amir2026</a>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="https://t.me/ItzAmiRxD">Telegram • @ItzAmiRxD</a>
-  </sub>
+      <td align="center">
+        <a href="https://t.me/ItzAmiRxD">
+          <img
+            src="https://cdn.simpleicons.org/telegram/FFFFFF"
+            width="50"
+            height="50"
+            alt="Telegram"
+          >
+        </a>
+        <br>
+        <sub>Telegram • @ItzAmiRxD</sub>
+      </td>
+    </tr>
+  </table>
 
 </div>
 
