@@ -1,5 +1,5 @@
 # <img width="150" height="150" alt="image" src="https://github.com/user-attachments/assets/c35e9b16-60e7-45eb-8914-a590d08d378d" />
-#   <img width="20" height="20" alt="image" src="https://github.com/user-attachments/assets/c35e9b16-60e7-45eb-8914-a590d08d378d" />    VoiceGroupCleaner Plugin    
+#   <img width="25" height="25" alt="image" src="https://github.com/user-attachments/assets/c35e9b16-60e7-45eb-8914-a590d08d378d" />    VoiceGroupCleaner Plugin    
 
 A Paper/Spigot/Purpur plugin that keeps [Simple Voice Chat](https://modrinth.com/plugin/simple-voice-chat) groups
 under control. Players can only be in the voice groups you allow and anything else gets cleaned up automatically,
