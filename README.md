@@ -46,15 +46,15 @@ i am **1amir2026**. ( who actually started this )
 <h3 align="center">🔗 Our Links</h3>
 
 <div align="center">
-  <a href="https://t.me/BloxyDesign">
+  <a href="https://t.me/BloxyDesign" style="text-decoration:none;">
     <img src="https://cdn.simpleicons.org/telegram/ffffff" width="50" height="50" alt="BloxyDesign">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://github.com/1amir2026">
+  <a href="https://github.com/1amir2026" style="text-decoration:none;">
     <img src="https://cdn.simpleicons.org/github/ffffff" width="50" height="50" alt="GitHub">
   </a>
   &nbsp;&nbsp;&nbsp;&nbsp;
-  <a href="https://t.me/ItzAmiRxD">
+  <a href="https://t.me/ItzAmiRxD" style="text-decoration:none;">
     <img src="https://cdn.simpleicons.org/telegram/ffffff" width="50" height="50" alt="Telegram">
   </a>
 
