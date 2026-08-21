@@ -42,7 +42,11 @@ Quilt/Fabric build : Quilt is a mod loader, not a plugin loader, and this plugin
 Bukkit-compatibility mod like Cardboard, which isn't officially supported here.
 
 > [!NOTE]
->  Paper/Spigot/Purpur Are Safe to USE.
+> **Paper**, **Spigot**, and **Purpur** servers can be installed easily by downloading the `.jar` file compatible with your **server loader** and **server version**, then placing it into the `/plugins` folder in your server's **File > Manager**.
+> After uploading the `.jar` file, simply **restart your server** to load the plugin.
+> 
+> **Need more help?** Check the **Installation** section of the `[README.md](https://github.com/1amir2026/VoiceGroupsCleaner/README.md)` for detailed instructions and additional information.
+
 
 ## Who We Are?
 
