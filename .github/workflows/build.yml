@@ -1,0 +1,115 @@
+name: Build & Publish
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: "Publish to Modrinth"
+        type: boolean
+        default: true
+
+env:
+  MIN_GAME_VERSION: "1.20.1"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      - name: Build with Maven
+        run: mvn -B clean package
+
+      - name: Locate built jar
+        id: jar
+        run: |
+          JAR_PATH=$(find target -maxdepth 1 -name "*.jar" ! -name "*sources*" ! -name "*javadoc*" | head -n1)
+          echo "path=$JAR_PATH" >> "$GITHUB_OUTPUT"
+          echo "Built: $JAR_PATH"
+
+      - name: Resolve supported Minecraft versions
+        id: versions
+        run: |
+          python3 - <<'PY'
+          import json, os, urllib.request
+
+          def get_json(url):
+              with urllib.request.urlopen(url) as r:
+                  return json.load(r)
+
+          def parse(v):
+              parts = []
+              for p in v.split("."):
+                  if p.isdigit():
+                      parts.append(int(p))
+                  else:
+                      return None
+              while len(parts) < 3:
+                  parts.append(0)
+              return tuple(parts[:3])
+
+          min_v = parse(os.environ["MIN_GAME_VERSION"])
+
+          manifest = get_json("https://piston-meta.mojang.com/mc/game/version_manifest_v2.json")
+          latest_release = manifest["latest"]["release"]
+          latest_v = parse(latest_release)
+
+          tags = get_json("https://api.modrinth.com/v2/tag/game_version")
+          versions = []
+          for t in tags:
+              if t.get("version_type") != "release":
+                  continue
+              v = parse(t["version"])
+              if v is None:
+                  continue
+              if min_v <= v <= latest_v:
+                  versions.append(t["version"])
+
+          versions = sorted(set(versions), key=parse)
+          if not versions:
+              versions = [os.environ["MIN_GAME_VERSION"], latest_release]
+
+          out = ",".join(versions)
+          print("Resolved game versions:", out)
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write(f"list={out}\n")
+              f.write(f"latest={latest_release}\n")
+          PY
+
+      - name: Publish to Modrinth
+        if: github.event_name == 'push' || inputs.publish
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          modrinth-id: ${{ secrets.MODRINTH_PROJECT_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          files-primary: ${{ steps.jar.outputs.path }}
+          name: VoiceGroupCleaner ${{ github.ref_name }}
+          version: ${{ github.ref_name }}
+          version-type: release
+          loaders: |
+            paper
+            spigot
+            purpur
+            bukkit
+            folia
+          game-versions: ${{ steps.versions.outputs.list }}
+          java: |
+            17
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ${{ steps.jar.outputs.path }}
+          generate_release_notes: true
