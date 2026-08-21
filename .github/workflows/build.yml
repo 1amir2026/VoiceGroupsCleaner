@@ -115,6 +115,7 @@ jobs:
         run: |
           mkdir -p dist
           SRC=$(find target -maxdepth 1 -name "*.jar" ! -name "*sources*" ! -name "*javadoc*" | head -n1)
+          echo "src=$SRC" >> "$GITHUB_OUTPUT"
           VERSION="${{ steps.ver.outputs.version }}"
           while IFS= read -r MCVER; do
             [ -z "$MCVER" ] && continue
@@ -158,7 +159,7 @@ jobs:
         with:
           modrinth-id: ${{ secrets.MODRINTH_PROJECT_ID }}
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          files: dist/*.jar
+          files: ${{ steps.pkg.outputs.src }}
           name: ${{ steps.notes.outputs.subtitle }}
           version: ${{ steps.ver.outputs.version }}
           version-type: ${{ steps.ver.outputs.type }}
