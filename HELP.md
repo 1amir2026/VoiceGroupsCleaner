@@ -16,6 +16,7 @@ not a resource-pack sound key. If you want a resource-pack sound instead, use a 
 
 **I want a group name change to apply without a restart.**
 `/vgclean reload` re-reads `config.yml` and restarts the cleanup timer : no restart needed.
+or use `/vgclean keep <group-name>` no reload needed.
 
 **Where's the full command/config list?**
 [`docs/commands.md`](docs/commands.md).
