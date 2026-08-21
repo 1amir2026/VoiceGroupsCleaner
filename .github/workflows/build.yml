@@ -116,16 +116,18 @@ jobs:
           mkdir -p dist
           SRC=$(find target -maxdepth 1 -name "*.jar" ! -name "*sources*" ! -name "*javadoc*" | head -n1)
           VERSION="${{ steps.ver.outputs.version }}"
-          MCTAG="${{ steps.versions.outputs.latest }}"
-          for LOADER in paper purpur spigot bukkit folia; do
-            OUT="dist/vgcleaner-${LOADER}-${VERSION}+mc${MCTAG}.jar"
-            cp "$SRC" "$OUT"
-            echo "loader=${LOADER}" > loader-marker.txt
-            echo "version=${VERSION}" >> loader-marker.txt
-            zip -q "$OUT" loader-marker.txt
-            rm loader-marker.txt
-          done
-          ls -la dist
+          while IFS= read -r MCVER; do
+            [ -z "$MCVER" ] && continue
+            for LOADER in paper purpur spigot bukkit folia; do
+              OUT="dist/vgcleaner-${LOADER}-${VERSION}+mc${MCVER}.jar"
+              cp "$SRC" "$OUT"
+              printf "loader=%s\nversion=%s\nmc=%s\n" "$LOADER" "$VERSION" "$MCVER" > loader-marker.txt
+              zip -q "$OUT" loader-marker.txt
+              rm loader-marker.txt
+            done
+          done <<< "${{ steps.versions.outputs.list }}"
+          echo "Built $(ls dist | wc -l) jars:"
+          ls dist
 
       - name: Build changelog & subtitle
         id: notes
