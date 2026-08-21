@@ -43,8 +43,6 @@ Bukkit-compatibility mod like Cardboard, which isn't officially supported here.
 
 i am **1amir2026**. ( who actually started this ) 
 
-<h3 align="center">🔗 Our Links</h3>
-
 <div align="center">
   <a href="https://t.me/BloxyDesign" style="text-decoration:none;">
     <img src="https://cdn.simpleicons.org/telegram/ffffff" width="50" height="50" alt="BloxyDesign">
@@ -57,9 +55,13 @@ i am **1amir2026**. ( who actually started this )
   <a href="https://t.me/ItzAmiRxD" style="text-decoration:none;">
     <img src="https://cdn.simpleicons.org/telegram/ffffff" width="50" height="50" alt="Telegram">
   </a>
+</div>
 
-  <br><br>
+## And CHECKOUT here:
 
+ [LICENSE](LICENSE).
+
+ <div align="center">
   <sub>
     <a href="https://t.me/BloxyDesign">Designer • @BloxyDesign</a>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -68,9 +70,3 @@ i am **1amir2026**. ( who actually started this )
     <a href="https://t.me/ItzAmiRxD">Telegram • @ItzAmiRxD</a>
   </sub>
 </div>
-
-
-
-## And CHECKOUT here:
-
- [LICENSE](LICENSE).
