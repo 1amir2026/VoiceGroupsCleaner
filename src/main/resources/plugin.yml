@@ -1,9 +1,9 @@
 name: VoiceGroupCleaner
 version: '${project.version}'
-main: me.jjjotby.voicegroupcleaner.VoiceGroupCleaner
+main: me.itzamirxd.voicegroupcleaner.VoiceGroupCleaner
 api-version: '1.21'
 author: 1amir2026
-website: https://github.com/1amir2026/VoiceGroupCleaner
+website: https://github.com/1amir2026/VoiceGroupsCleaner
 description: Periodically removes Simple Voice Chat groups that aren't in the configured allow-list.
 depend: [voicechat]
 
