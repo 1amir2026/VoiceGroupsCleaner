@@ -1,4 +1,4 @@
-# <img width="1280" height="1280" alt="image" src="https://github.com/user-attachments/assets/c35e9b16-60e7-45eb-8914-a590d08d378d" />
+# <img width="720" height="720" alt="image" src="https://github.com/user-attachments/assets/c35e9b16-60e7-45eb-8914-a590d08d378d" />
  VoiceGroupCleaner Plugin
 
 A Paper/Spigot/Purpur plugin that keeps [Simple Voice Chat](https://modrinth.com/plugin/simple-voice-chat) groups
