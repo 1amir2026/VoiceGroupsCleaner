@@ -21,15 +21,41 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up JDK 17
+      - name: Set up JDK 21
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "17"
+          java-version: "21"
           cache: maven
 
+      - name: Resolve version info from tag
+        id: ver
+        run: |
+          RAW="${GITHUB_REF_NAME#v}"
+          echo "version=$RAW" >> "$GITHUB_OUTPUT"
+          if echo "$RAW" | grep -qi "alpha"; then
+            echo "type=alpha" >> "$GITHUB_OUTPUT"
+          elif echo "$RAW" | grep -qi "beta"; then
+            echo "type=beta" >> "$GITHUB_OUTPUT"
+          else
+            echo "type=release" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Set project version from tag
+        run: mvn -B versions:set -DnewVersion="${{ steps.ver.outputs.version }}" -DgenerateBackupPoms=false
+
       - name: Build with Maven
-        run: mvn -B clean package
+        run: |
+          n=0
+          until mvn -B clean package; do
+            n=$((n+1))
+            if [ "$n" -ge 3 ]; then
+              echo "Maven build failed after 3 attempts, giving up."
+              exit 1
+            fi
+            echo "Maven build failed (attempt $n/3), retrying in 20s..."
+            sleep 20
+          done
 
       - name: Locate built jar
         id: jar
@@ -87,29 +113,67 @@ jobs:
               f.write(f"latest={latest_release}\n")
           PY
 
+      - name: Package per-loader jars
+        id: pkg
+        run: |
+          mkdir -p dist
+          SRC="${{ steps.jar.outputs.path }}"
+          VERSION="${{ steps.ver.outputs.version }}"
+          MCTAG="${{ steps.versions.outputs.latest }}"
+          for LOADER in paper purpur spigot bukkit folia; do
+            cp "$SRC" "dist/vgcleaner-${LOADER}-${VERSION}+mc${MCTAG}.jar"
+          done
+          ls -la dist
+
+      - name: Build changelog & subtitle
+        id: notes
+        run: |
+          VERSION="${{ steps.ver.outputs.version }}"
+          MIN="${{ env.MIN_GAME_VERSION }}"
+          LATEST="${{ steps.versions.outputs.latest }}"
+
+          BODY=$(awk '/^## /{if (seen) exit; seen=1; next} seen' CHANGELOG.md | sed '/^$/d')
+
+          {
+            echo "notes<<EOF"
+            echo "> **VoiceGroupCleaner ${VERSION}**"
+            echo ">"
+            echo "> Supports **Paper**, **Purpur**, **Spigot**, **Bukkit**, and **Folia**, Minecraft **${MIN}** to **${LATEST}**."
+            echo ">"
+            echo "$BODY" | sed 's/^/> /'
+            echo ">"
+            echo "> \"Requires Simple Voice Chat to be installed.\""
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+          echo "subtitle=VoiceGroupCleaner ${VERSION} — MC ${MIN} to ${LATEST}" >> "$GITHUB_OUTPUT"
+
       - name: Publish to Modrinth
         if: github.event_name == 'push' || inputs.publish
         uses: Kir-Antipov/mc-publish@v3.3
         with:
           modrinth-id: ${{ secrets.MODRINTH_PROJECT_ID }}
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          files-primary: ${{ steps.jar.outputs.path }}
-          name: VoiceGroupCleaner ${{ github.ref_name }}
-          version: ${{ github.ref_name }}
-          version-type: release
+          files: dist/*.jar
+          name: ${{ steps.notes.outputs.subtitle }}
+          version: ${{ steps.ver.outputs.version }}
+          version-type: ${{ steps.ver.outputs.type }}
+          changelog: ${{ steps.notes.outputs.notes }}
           loaders: |
             paper
-            spigot
             purpur
+            spigot
             bukkit
             folia
           game-versions: ${{ steps.versions.outputs.list }}
+          dependencies: |
+            simple-voice-chat(required)
           java: |
-            17
+            21
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
         with:
-          files: ${{ steps.jar.outputs.path }}
+          files: dist/*.jar
           generate_release_notes: true
