@@ -1,4 +1,4 @@
-# Help
+# <img width="28" height="28" alt="image" src="https://github.com/user-attachments/assets/c35e9b16-60e7-45eb-8914-a590d08d378d" />    Help
 
 **Nothing happens when a group is created.**
 Check `group-create-guard.enabled: true` in `config.yml`, and make sure Simple Voice Chat is fully loaded
