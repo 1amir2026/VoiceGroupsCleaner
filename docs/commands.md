@@ -73,3 +73,9 @@ standalone actionbar warning, not a chat message:
 messages:
   group-create-blocked: "&cYou can't create custom voice chat groups! (%group%)"
 ```
+
+> [!TIP]
+> The default `config.yml` is **safe to use** and usually requires little to no modification.
+>
+> However, it also provides **a wide range of options** for customization. You can change many settings to better suit your needs and configure the plugin exactly the way you want.
+
