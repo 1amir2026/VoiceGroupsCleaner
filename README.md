@@ -1,5 +1,5 @@
 <div align="center">
-  <video src="Gallery/line.mp4" autoplay loop muted></video>
+  <img src="Gallery/line.gif" width="320">
   <h1><img width="28" height="28" alt="image" src="https://github.com/user-attachments/assets/c35e9b16-60e7-45eb-8914-a590d08d378d" />    VoiceGroupCleaner Plugin</h1>
   <p>&#8203;</p>
 </div>
