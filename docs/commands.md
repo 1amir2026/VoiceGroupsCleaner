@@ -15,9 +15,9 @@ Permission: `vgclean.reload` (default: op)
 > [!warning] 
 > The /vgclean clean command can sometimes be configured to run automatically.
 >
-> This is useful because automatically removing groups may occasionally cause issues with your server or other plugins/scripts. ( e.g: VoiceServer plugin ) 
+> This is useful because automatically removing groups may occasionally cause issues when you want make groups without SimpleVoiceChat plugin and With Another plugins/scripts. ( e.g: VoiceServer plugin ) 
 > 
-> However, groups that need to be removed—especially groups created by non-OP players—will still be removed within seconds, so unnecessary groups won't remain for long.
+> However, groups with SimpleVoiceChat Plugin that need to be removed—especially groups created by non-OP players will still be removed within seconds, so unnecessary groups won't remain for long.
 
 ## `config.yml`
 
