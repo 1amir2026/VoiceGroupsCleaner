@@ -1,4 +1,4 @@
-# VoiceGroupCleaner - a minecraft Plugin
+# VoiceGroupCleaner Plugin
 
 A Paper/Spigot/Purpur plugin that keeps [Simple Voice Chat](https://modrinth.com/plugin/simple-voice-chat) groups
 under control. Players can only be in the voice groups you allow and anything else gets cleaned up automatically,
