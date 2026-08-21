@@ -57,16 +57,16 @@ i am **1amir2026**. ( who actually started this )
   </a>
 </div>
 
-## And CHECKOUT here:
+## Links:
 
- [LICENSE](LICENSE).
-
- <div align="center">
+<div align="center">
   <sub>
     <a href="https://t.me/BloxyDesign">Designer • @BloxyDesign</a>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="https://github.com/1amir2026">GitHub • 1amir2026</a>
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="https://t.me/ItzAmiRxD">Telegram • @ItzAmiRxD</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="LICENSE">License</a>
   </sub>
 </div>
