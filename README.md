@@ -46,7 +46,7 @@ Bukkit-compatibility mod like Cardboard, which isn't officially supported here.
 > After uploading the `.jar` file, simply **restart your server** to load the plugin.
 > 
 > **Need more help?** Check the **Installation** section of the `README.md` for detailed instructions and additional information.
-> - [[Installation]](https://github.com/1amir2026/VoiceGroupsCleaner/blob/main/README.md#L24) (:
+> - [[Installation]](https://github.com/1amir2026/VoiceGroupsCleaner#how-to-download-and-use) (:
 
 
 ## Who We Are?
