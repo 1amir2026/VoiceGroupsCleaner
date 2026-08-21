@@ -39,42 +39,59 @@ covers **Paper, Purpur, Spigot, and Bukkit-based servers** from 1.20 through the
 Quilt/Fabric build : Quilt is a mod loader, not a plugin loader, and this plugin can't run on it without a
 Bukkit-compatibility mod like Cardboard, which isn't officially supported here.
 
-## Who Am I?
+## Who We Are?
 
-i am **1amir2026**.
+i am **1amir2026**. ( who actually started this ) 
 
-<a href="https://t.me/BloxyDesign">
-  <img
-    src="https://cdn.simpleicons.org/telegram/ffffff"
-    width="50"
-    height="50"
-    alt="BloxyDesign"
-    style="border-radius:50%;"
-  >
-</a>&nbsp;&nbsp;
+<h3 align="center">🔗 Our Links</h3>
 
-<a href="https://github.com/1amir2026">
-  <img
-    src="https://cdn.simpleicons.org/github/ffffff"
-    width="50"
-    height="50"
-    alt="GitHub"
-    style="border-radius:50%;"
-  >
-</a>&nbsp;&nbsp;
+<div align="center">
 
-<a href="https://t.me/ItzAmiRxD">
-  <img
-    src="https://cdn.simpleicons.org/telegram/26A5E4"
-    width="50"
-    height="50"
-    alt="Telegram"
-    style="border-radius:50%;"
-  >
-</a>
+  <a href="https://t.me/BloxyDesign">
+    <img
+      src="https://cdn.simpleicons.org/telegram/26A5E4"
+      width="50"
+      height="50"
+      alt="BloxyDesign"
+    >
+  </a>
+
+  &nbsp;&nbsp;&nbsp;&nbsp;
+
+  <a href="https://github.com/1amir2026">
+    <img
+      src="https://cdn.simpleicons.org/github/181717"
+      width="50"
+      height="50"
+      alt="GitHub"
+    >
+  </a>
+
+  &nbsp;&nbsp;&nbsp;&nbsp;
+
+  <a href="https://t.me/ItzAmiRxD">
+    <img
+      src="https://cdn.simpleicons.org/telegram/26A5E4"
+      width="50"
+      height="50"
+      alt="Telegram"
+    >
+  </a>
+
+  <br>
+
+  <sub>
+    <a href="https://t.me/BloxyDesign">Designer • @BloxyDesign</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://github.com/1amir2026">GitHub • 1amir2026</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://t.me/ItzAmiRxD">Telegram • @ItzAmiRxD</a>
+  </sub>
+
+</div>
 
 
 
-## and check out:
+## And CHECKOUT here:
 
  [LICENSE](LICENSE).
