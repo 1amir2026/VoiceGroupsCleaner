@@ -21,11 +21,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Set up JDK 21
+      - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: "21"
+          java-version: "17"
           cache: maven
 
       - name: Build with Maven
@@ -93,7 +93,7 @@ jobs:
         with:
           modrinth-id: ${{ secrets.MODRINTH_PROJECT_ID }}
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          files: target/*.jar
+          files-primary: ${{ steps.jar.outputs.path }}
           name: VoiceGroupCleaner ${{ github.ref_name }}
           version: ${{ github.ref_name }}
           version-type: release
@@ -105,7 +105,7 @@ jobs:
             folia
           game-versions: ${{ steps.versions.outputs.list }}
           java: |
-            21
+            17
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
