@@ -43,16 +43,36 @@ Bukkit-compatibility mod like Cardboard, which isn't officially supported here.
 
 i am **1amir2026**.
 
-<div align="center">
-  <a href="https://t.me/ItzAmiRxD">
-    <img
-      src="https://cdn.simpleicons.org/telegram/26A5E4"
-      width="50"
-      height="50"
-      alt="Telegram"
-    >
-  </a>
-</div>
+<a href="https://t.me/BloxyDesign">
+  <img
+    src="https://cdn.simpleicons.org/telegram/ffffff"
+    width="50"
+    height="50"
+    alt="BloxyDesign"
+    style="border-radius:50%;"
+  >
+</a>&nbsp;&nbsp;
+
+<a href="https://github.com/1amir2026">
+  <img
+    src="https://cdn.simpleicons.org/github/ffffff"
+    width="50"
+    height="50"
+    alt="GitHub"
+    style="border-radius:50%;"
+  >
+</a>&nbsp;&nbsp;
+
+<a href="https://t.me/ItzAmiRxD">
+  <img
+    src="https://cdn.simpleicons.org/telegram/26A5E4"
+    width="50"
+    height="50"
+    alt="Telegram"
+    style="border-radius:50%;"
+  >
+</a>
+
 
 
 ## and check out:
