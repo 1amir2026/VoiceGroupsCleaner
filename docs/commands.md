@@ -1,4 +1,4 @@
-# VoiceGroupCleaner : Commands & Configuration Reference
+# <img width="28" height="28" alt="image" src="https://github.com/user-attachments/assets/c35e9b16-60e7-45eb-8914-a590d08d378d" />    VoiceGroupCleaner : Commands & Configuration Reference
 
 ## `/vgclean`
 
