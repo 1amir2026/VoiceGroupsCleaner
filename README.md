@@ -1,7 +1,7 @@
 <div align="center">
   <img src="image.png" width="300">
-  <h1>#   <img width="30" height="30" alt="image" src="https://github.com/user-attachments/assets/c35e9b16-60e7-45eb-8914-a590d08d378d" />    VoiceGroupCleaner Plugin   </h1>
-  <p>A cool Minecraft project</p>
+  <h1><img width="28" height="28" alt="image" src="https://github.com/user-attachments/assets/c35e9b16-60e7-45eb-8914-a590d08d378d" />    VoiceGroupCleaner Plugin</h1>
+  <p>A Minecraft Plugin</p>
 </div>
  
 
