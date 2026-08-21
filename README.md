@@ -43,57 +43,30 @@ Bukkit-compatibility mod like Cardboard, which isn't officially supported here.
 
 i am **1amir2026**. ( who actually started this ) 
 
-<h3 align="center">🔗 My Links</h3>
+<h3 align="center">🔗 Our Links</h3>
 
 <div align="center">
+  <a href="https://t.me/BloxyDesign">
+    <img src="https://cdn.simpleicons.org/telegram/ffffff" width="50" height="50" alt="BloxyDesign">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://github.com/1amir2026">
+    <img src="https://cdn.simpleicons.org/github/ffffff" width="50" height="50" alt="GitHub">
+  </a>
+  &nbsp;&nbsp;&nbsp;&nbsp;
+  <a href="https://t.me/ItzAmiRxD">
+    <img src="https://cdn.simpleicons.org/telegram/ffffff" width="50" height="50" alt="Telegram">
+  </a>
 
-  <table>
-    <tr>
-      <td align="center">
-        <a href="https://t.me/BloxyDesign">
-          <img
-            src="https://cdn.simpleicons.org/telegram/FFFFFF"
-            width="50"
-            height="50"
-            alt="Designer"
-          >
-        </a>
-        <br>
-        <sub>Designer • @BloxyDesign</sub>
-      </td>
+  <br><br>
 
-      <td width="40"></td>
-
-      <td align="center">
-        <a href="https://github.com/1amir2026">
-          <img
-            src="https://cdn.simpleicons.org/github/FFFFFF"
-            width="50"
-            height="50"
-            alt="GitHub"
-          >
-        </a>
-        <br>
-        <sub>GitHub • 1amir2026</sub>
-      </td>
-
-      <td width="40"></td>
-
-      <td align="center">
-        <a href="https://t.me/ItzAmiRxD">
-          <img
-            src="https://cdn.simpleicons.org/telegram/FFFFFF"
-            width="50"
-            height="50"
-            alt="Telegram"
-          >
-        </a>
-        <br>
-        <sub>Telegram • @ItzAmiRxD</sub>
-      </td>
-    </tr>
-  </table>
-
+  <sub>
+    <a href="https://t.me/BloxyDesign">Designer • @BloxyDesign</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://github.com/1amir2026">GitHub • 1amir2026</a>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="https://t.me/ItzAmiRxD">Telegram • @ItzAmiRxD</a>
+  </sub>
 </div>
 
 
