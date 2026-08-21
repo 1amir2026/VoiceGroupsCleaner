@@ -41,6 +41,9 @@ covers **Paper, Purpur, Spigot, and Bukkit-based servers** from 1.20 through the
 Quilt/Fabric build : Quilt is a mod loader, not a plugin loader, and this plugin can't run on it without a
 Bukkit-compatibility mod like Cardboard, which isn't officially supported here.
 
+> [!NOTE]
+>  Paper/Spigot/Purpur Are Safe to USE.
+
 ## Who We Are?
 
 i am **1amir2026**. ( who actually started this ) 
