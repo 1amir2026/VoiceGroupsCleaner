@@ -10,6 +10,9 @@ A Paper/Spigot/Purpur plugin that keeps [Simple Voice Chat](https://modrinth.com
 under control. Players can only be in the voice groups you allow and anything else gets cleaned up automatically,
 and anyone who tries to make their own group gets bounced straight back out.
 
+<p>&#8203;</p>
+<p>&#8203;</p>
+
 ## What Is This Plugin?
 
 - **Allow-list based cleanup** : any Simple Voice Chat group not on your list is removed on a timer.
