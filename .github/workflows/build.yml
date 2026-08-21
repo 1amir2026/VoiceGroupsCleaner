@@ -93,7 +93,7 @@ jobs:
         with:
           modrinth-id: ${{ secrets.MODRINTH_PROJECT_ID }}
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          files-primary: ${{ steps.jar.outputs.path }}
+          files: target/*.jar
           name: VoiceGroupCleaner ${{ github.ref_name }}
           version: ${{ github.ref_name }}
           version-type: release
