@@ -12,6 +12,13 @@ Permission: `vgclean.reload` (default: op)
 | `/vgclean keep <name>` | Adds a group name to `allowed-groups` and saves it. |
 | `/vgclean remove <name>` | Removes a group name from `allowed-groups` and saves it. |
 
+> [!warning] 
+> The /vgclean clean command can sometimes be configured to run automatically.
+>
+> This is useful because automatically removing groups may occasionally cause issues with your server or other plugins/scripts. ( e.g: VoiceServer plugin ) 
+> 
+> However, groups that need to be removed—especially groups created by non-OP players—will still be removed within seconds, so unnecessary groups won't remain for long.
+
 ## `config.yml`
 
 | Key | What it does |
