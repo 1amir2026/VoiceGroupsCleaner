@@ -42,39 +42,17 @@ Bukkit-compatibility mod like Cardboard, which isn't officially supported here.
 ## Who Am I?
 
 i am **1amir2026**.
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    .telegram-icon {
-      width: 100px;
-      height: 100px;
-      cursor: pointer;
-      transition: transform 0.25s ease;
-    }
-
-    .telegram-icon:hover {
-      transform: scale(0.75);
-    }
-  </style>
-</head>
-
-<body>
-
-  <a href="https://t.me/ItzAmiRxD" target="_blank">
+<div align="center">
+  <a href="https://t.me/ItzAmiRxD">
     <img
-      class="telegram-icon"
       src="https://cdn.simpleicons.org/telegram/26A5E4"
+      width="50"
+      height="50"
       alt="Telegram"
     >
   </a>
-
-</body>
-</html>
-> Telegram: [@ItzAmiRxD](https://t.me/ItzAmiRxD)
+</div>
 
 
 ## and check out:
