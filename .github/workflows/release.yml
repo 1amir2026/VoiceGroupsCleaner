@@ -23,15 +23,98 @@ jobs:
           java-version: 17
           cache: maven
 
-      - name: Get latest Minecraft release
-        id: mc
+      - name: Resolve version info from tag
+        id: ver
         run: |
-          LATEST=$(curl -s https://launchermeta.mojang.com/mc/game/version_manifest_v2.json | jq -r '.latest.release')
-          echo "version=$LATEST" >> "$GITHUB_OUTPUT"
-          echo "Latest Minecraft release: $LATEST"
+          RAW="${GITHUB_REF_NAME#v}"
+          echo "version=$RAW" >> "$GITHUB_OUTPUT"
+          if echo "$RAW" | grep -qi "alpha"; then
+            echo "type=alpha" >> "$GITHUB_OUTPUT"
+          elif echo "$RAW" | grep -qi "beta"; then
+            echo "type=beta" >> "$GITHUB_OUTPUT"
+          else
+            echo "type=release" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Resolve Minecraft version range
+        id: mc
+        env:
+          MIN_GAME_VERSION: ${{ vars.MIN_GAME_VERSION || '1.20' }}
+        run: |
+          curl -s https://launchermeta.mojang.com/mc/game/version_manifest_v2.json -o manifest.json
+          python3 - <<'PY'
+          import json, os
+
+          data = json.load(open("manifest.json"))
+          min_v = os.environ["MIN_GAME_VERSION"]
+
+          def key(v):
+              return tuple(int(p) if p.isdigit() else 0 for p in v.split("."))
+
+          releases = sorted({v["id"] for v in data["versions"] if v["type"] == "release"}, key=key)
+          start = releases.index(min_v) if min_v in releases else 0
+          in_range = releases[start:]
+
+          latest = next(v["id"] for v in data["versions"] if v["type"] == "release")
+
+          with open(os.environ["GITHUB_OUTPUT"], "a") as f:
+              f.write("versions<<EOF\n")
+              f.write("\n".join(in_range))
+              f.write("\nEOF\n")
+              f.write(f"latest={latest}\n")
+              f.write(f"min={min_v}\n")
+          PY
+
+      - name: Set project version from tag
+        run: mvn -B versions:set -DnewVersion="${{ steps.ver.outputs.version }}" -DgenerateBackupPoms=false
 
       - name: Build with Maven
-        run: mvn -B clean package
+        run: |
+          n=0
+          until mvn -B clean package; do
+            n=$((n+1))
+            if [ "$n" -ge 3 ]; then
+              echo "Maven build failed after 3 attempts, giving up."
+              exit 1
+            fi
+            echo "Maven build failed (attempt $n/3), retrying in 20s..."
+            sleep 20
+          done
+
+      - name: Package per-loader jars
+        id: pkg
+        run: |
+          mkdir -p dist
+          SRC=$(ls target/VoiceGroupCleaner-*.jar | head -n1)
+          VERSION="${{ steps.ver.outputs.version }}"
+          MCTAG="${{ steps.mc.outputs.latest }}"
+          for LOADER in paper purpur spigot bukkit; do
+            cp "$SRC" "dist/vgcleaner-${LOADER}-${VERSION}+mc${MCTAG}.jar"
+          done
+          ls -la dist
+
+      - name: Build changelog & subtitle
+        id: notes
+        run: |
+          VERSION="${{ steps.ver.outputs.version }}"
+          MIN="${{ steps.mc.outputs.min }}"
+          LATEST="${{ steps.mc.outputs.latest }}"
+
+          BODY=$(awk '/^## /{if (seen) exit; seen=1; next} seen' CHANGELOG.md | sed '/^$/d')
+
+          {
+            echo "notes<<EOF"
+            echo "> **VoiceGroupCleaner ${VERSION}**"
+            echo ">"
+            echo "> Supports **Paper**, **Purpur**, **Spigot**, and **Bukkit**, Minecraft **${MIN}** to **${LATEST}**."
+            echo ">"
+            echo "$BODY" | sed 's/^/> /'
+            echo ">"
+            echo "> \"Requires Simple Voice Chat to be installed.\""
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+          echo "subtitle=VoiceGroupCleaner ${VERSION} — MC ${MIN} to ${LATEST}" >> "$GITHUB_OUTPUT"
 
       - name: Publish to Modrinth
         uses: Kir-Antipov/mc-publish@v3.3
@@ -39,17 +122,18 @@ jobs:
           modrinth-id: ${{ secrets.MODRINTH_PROJECT_ID }}
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          files: target/VoiceGroupCleaner-*.jar
-          name: VoiceGroupCleaner ${{ github.ref_name }} (up to MC ${{ steps.mc.outputs.version }})
-          version: ${{ github.ref_name }}
-          version-type: release
-          changelog-file: CHANGELOG.md
+          files: dist/*.jar
+          name: ${{ steps.notes.outputs.subtitle }}
+          version: ${{ steps.ver.outputs.version }}
+          version-type: ${{ steps.ver.outputs.type }}
+          changelog: ${{ steps.notes.outputs.notes }}
           loaders: |
             paper
             purpur
             spigot
             bukkit
-          game-versions: >=1.20
-          game-version-filter: releases
+          game-versions: ${{ steps.mc.outputs.versions }}
+          dependencies: |
+            simple-voice-chat(required)
           java: |
             17
