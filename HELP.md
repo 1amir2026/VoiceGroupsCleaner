@@ -6,7 +6,7 @@ Check `group-create-guard.enabled: true` in `config.yml`, and make sure Simple V
 
 **The kick command doesn't run.**
 Commands in `group-create-guard.commands` run *as the player*. If a command needs a permission the player
-doesn't have, it will silently fail from their perspective — check console with `debug: true` for the
+doesn't have, it will silently fail from their perspective : check console with `debug: true` for the
 per-command Ran/Failed log line.
 
 **Sound doesn't play.**
@@ -15,7 +15,7 @@ not a resource-pack sound key. If you want a resource-pack sound instead, use a 
 `group-create-guard.commands` instead of the built-in `sound` field.
 
 **I want a group name change to apply without a restart.**
-`/vgclean reload` re-reads `config.yml` and restarts the cleanup timer — no restart needed.
+`/vgclean reload` re-reads `config.yml` and restarts the cleanup timer : no restart needed.
 
 **Where's the full command/config list?**
 [`docs/commands.md`](docs/commands.md).
