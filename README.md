@@ -35,7 +35,8 @@ also linked directly from the top of `config.yml`.
 
 ## Compatibility
 
-Compiled against the Paper API, which stays backwards compatible within a Minecraft version line, so one jar
+> [!IMPORTANT]
+> Compiled against the Paper API, which stays backwards compatible within a Minecraft version line, so one jar
 covers **Paper, Purpur, Spigot, and Bukkit-based servers** from 1.20 through the latest release. There is no
 Quilt/Fabric build : Quilt is a mod loader, not a plugin loader, and this plugin can't run on it without a
 Bukkit-compatibility mod like Cardboard, which isn't officially supported here.
