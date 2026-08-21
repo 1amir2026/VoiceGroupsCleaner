@@ -7,7 +7,7 @@
 - Added `%displayname%` placeholder alongside `%player%`.
 - Actionbar kick message no longer has a fixed prefix/icon : plain colored text only.
 - `config.yml` now links straight to the full docs.
-- Author changed to 1amir2026.
+- Author changed from my game username ( "jjjotby" ) to 1amir2026.
 
 ## 1.0.0
 
