@@ -1,0 +1,55 @@
+name: Build & Publish
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: maven
+
+      - name: Get latest Minecraft release
+        id: mc
+        run: |
+          LATEST=$(curl -s https://launchermeta.mojang.com/mc/game/version_manifest_v2.json | jq -r '.latest.release')
+          echo "version=$LATEST" >> "$GITHUB_OUTPUT"
+          echo "Latest Minecraft release: $LATEST"
+
+      - name: Build with Maven
+        run: mvn -B clean package
+
+      - name: Publish to Modrinth
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          modrinth-id: ${{ secrets.MODRINTH_PROJECT_ID }}
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          files: target/VoiceGroupCleaner-*.jar
+          name: VoiceGroupCleaner ${{ github.ref_name }} (up to MC ${{ steps.mc.outputs.version }})
+          version: ${{ github.ref_name }}
+          version-type: release
+          changelog-file: CHANGELOG.md
+          loaders: |
+            paper
+            purpur
+            spigot
+            bukkit
+          game-versions: >=1.20
+          game-version-filter: releases
+          java: |
+            17
