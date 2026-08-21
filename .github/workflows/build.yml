@@ -15,7 +15,7 @@ env:
   MIN_GAME_VERSION: "1.20.1"
 
 jobs:
-  build:
+  build-and-publish:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -41,30 +41,7 @@ jobs:
             echo "type=release" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Set project version from tag
-        run: mvn -B versions:set -DnewVersion="${{ steps.ver.outputs.version }}" -DgenerateBackupPoms=false
-
-      - name: Build with Maven
-        run: |
-          n=0
-          until mvn -B clean package; do
-            n=$((n+1))
-            if [ "$n" -ge 3 ]; then
-              echo "Maven build failed after 3 attempts, giving up."
-              exit 1
-            fi
-            echo "Maven build failed (attempt $n/3), retrying in 20s..."
-            sleep 20
-          done
-
-      - name: Locate built jar
-        id: jar
-        run: |
-          JAR_PATH=$(find target -maxdepth 1 -name "*.jar" ! -name "*sources*" ! -name "*javadoc*" | head -n1)
-          echo "path=$JAR_PATH" >> "$GITHUB_OUTPUT"
-          echo "Built: $JAR_PATH"
-
-      - name: Resolve supported Minecraft versions
+      - name: Resolve Minecraft version range
         id: versions
         run: |
           python3 - <<'PY'
@@ -114,15 +91,36 @@ jobs:
               f.write(f"latest={latest_release}\n")
           PY
 
+      - name: Set project version from tag
+        run: mvn -B versions:set -DnewVersion="${{ steps.ver.outputs.version }}" -DgenerateBackupPoms=false
+
+      - name: Build with Maven
+        run: |
+          n=0
+          until mvn -B clean package; do
+            n=$((n+1))
+            if [ "$n" -ge 3 ]; then
+              echo "Maven build failed after 3 attempts, giving up."
+              exit 1
+            fi
+            echo "Maven build failed (attempt $n/3), retrying in 20s..."
+            sleep 20
+          done
+
       - name: Package per-loader jars
         id: pkg
         run: |
           mkdir -p dist
-          SRC="${{ steps.jar.outputs.path }}"
+          SRC=$(find target -maxdepth 1 -name "*.jar" ! -name "*sources*" ! -name "*javadoc*" | head -n1)
           VERSION="${{ steps.ver.outputs.version }}"
           MCTAG="${{ steps.versions.outputs.latest }}"
           for LOADER in paper purpur spigot bukkit folia; do
-            cp "$SRC" "dist/vgcleaner-${LOADER}-${VERSION}+mc${MCTAG}.jar"
+            OUT="dist/vgcleaner-${LOADER}-${VERSION}+mc${MCTAG}.jar"
+            cp "$SRC" "$OUT"
+            echo "loader=${LOADER}" > loader-marker.txt
+            echo "version=${VERSION}" >> loader-marker.txt
+            zip -q "$OUT" loader-marker.txt
+            rm loader-marker.txt
           done
           ls -la dist
 
