@@ -1,0 +1,69 @@
+# VoiceGroupCleaner configuration
+# Full command reference: http://github.com/1amir2026/VoiceGroupsCleaner/commands.md
+
+check-interval: 100
+debug: false
+ignore-password-protected: true
+
+allowed-groups:
+  - "☠ ɢʟᴏʙᴀʟ"
+  - "🔥 ᴠᴀɴɪʟʟᴀ"
+  - "🔥 ᴀᴛʜʟᴀɴᴛɪᴄ"
+
+# Runs the instant a player creates a voice chat group whose name is NOT on
+# allowed-groups above, and is reused by /vgclean clean / the periodic sweep
+# for anyone already sitting in a disallowed group.
+group-create-guard:
+  enabled: true
+
+  # Ticks to wait (20 = 1 second) before acting once a disallowed group shows up.
+  delay-ticks: 20
+
+  # Every command here runs, in order, AS the player (not console) when they
+  # get bounced out of a disallowed group. Add as many as you want.
+  # Placeholders available: %player% (username), %displayname% (display name)
+  commands:
+    - "voicechat leave"
+
+  # Sound played on the player when they get kicked out.
+  # Any Bukkit Sound name works: https://jd.papermc.io/paper/1.21/org/bukkit/Sound.html
+  sound: "BLOCK_ANVIL_LAND"
+  sound-volume: 1.0
+  sound-pitch: 1.0
+
+# All player-facing text. Use '&' color codes (&a, &c, &6, &7, etc).
+# Placeholders: %count% (list-header), %group% (group name), %player% (username),
+# %displayname% (display name) - available wherever they make sense.
+messages:
+  no-permission: "&cYou don't have permission to use this command."
+  reloaded: "&aVoiceGroupCleaner config reloaded."
+  svc-not-ready: "&cSimple Voice Chat isn't ready yet."
+
+  list-header: "&6Voice chat groups (%count%):"
+  list-empty: "&eThere are no voice chat groups right now."
+  list-entry-kept: "&a[kept]"
+  list-entry-removable: "&c[removable]"
+  list-entry-auto: "&7[auto]"
+  list-entry-protected: "&b[protected]"
+  list-entry-flags: "&7(%flags%)"
+
+  clean-done: "&aRan a cleanup pass now."
+
+  # Shown in the actionbar (above the hotbar) the instant a player gets kicked
+  # out of a group they just created that isn't on the allow-list.
+  group-create-blocked: "&cYou can't create custom voice chat groups! (%group%)"
+
+  keep-usage: "&cUsage: /vgclean keep <group name>"
+  keep-added: "&aAdded '%group%' to the allow-list."
+  keep-exists: "&e'%group%' is already on the allow-list."
+
+  remove-usage: "&cUsage: /vgclean remove <group name>"
+  remove-removed: "&aRemoved '%group%' from the allow-list."
+  remove-not-found: "&e'%group%' wasn't on the allow-list."
+
+  usage-header: "&6VoiceGroupCleaner commands:"
+  usage-reload: "&e/vgclean reload &7- reload config.yml"
+  usage-list: "&e/vgclean list &7- list all voice groups"
+  usage-clean: "&e/vgclean clean &7- run a cleanup pass now"
+  usage-keep: "&e/vgclean keep <name> &7- add a group to the allow-list"
+  usage-remove: "&e/vgclean remove <name> &7- remove a group from the allow-list"

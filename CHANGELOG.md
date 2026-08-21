@@ -1,0 +1,14 @@
+# Changelog
+
+## 1.1.0
+
+- `group-create-guard.command` (single string) replaced with `group-create-guard.commands` (list) — add as many
+  extra commands as you want, all run as the player when they're kicked from a disallowed group.
+- Added `%displayname%` placeholder alongside `%player%`.
+- Actionbar kick message no longer has a fixed prefix/icon — plain colored text only.
+- `config.yml` now links straight to the full docs.
+- Author changed to 1amir2026.
+
+## 1.0.0
+
+- Initial release: allow-list based group cleanup, instant create-guard, `/vgclean` admin command.

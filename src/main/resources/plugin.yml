@@ -1,0 +1,19 @@
+name: VoiceGroupCleaner
+version: '${project.version}'
+main: me.jjjotby.voicegroupcleaner.VoiceGroupCleaner
+api-version: '1.21'
+author: 1amir2026
+website: https://github.com/1amir2026/VoiceGroupCleaner
+description: Periodically removes Simple Voice Chat groups that aren't in the configured allow-list.
+depend: [voicechat]
+
+commands:
+  vgclean:
+    description: Manage the Voice Group Cleaner plugin
+    usage: /vgclean <reload|list|clean|keep|remove>
+    permission: vgclean.reload
+
+permissions:
+  vgclean.reload:
+    description: Allows use of /vgclean commands
+    default: op
