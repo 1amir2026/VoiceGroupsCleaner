@@ -1,4 +1,4 @@
-# VoiceGroupCleaner — Commands & Configuration Reference
+# VoiceGroupCleaner : Commands & Configuration Reference
 
 ## `/vgclean`
 
@@ -22,7 +22,7 @@ Permission: `vgclean.reload` (default: op)
 | `allowed-groups` | The only group names players are allowed to be in. Everything else is fair game for cleanup. |
 | `group-create-guard.enabled` | Turns the instant kick-on-create behavior on/off. |
 | `group-create-guard.delay-ticks` | Delay before acting on a disallowed group. |
-| `group-create-guard.commands` | List of commands run **as the player** when they get kicked. Add as many as you like, one per line — see below. |
+| `group-create-guard.commands` | List of commands run **as the player** when they get kicked. Add as many as you like, one per line : see below. |
 | `group-create-guard.sound` / `sound-volume` / `sound-pitch` | The sound played on the player when they're kicked. Any [Bukkit `Sound`](https://jd.papermc.io/paper/1.21/org/bukkit/Sound.html) name works. |
 | `messages.*` | Every player-facing string, `&`-color-coded. |
 
@@ -50,8 +50,8 @@ group-create-guard:
 
 Available placeholders in these commands:
 
-- `%player%` — the player's username.
-- `%displayname%` — the player's display name (nickname, if they have one).
+- `%player%` : the player's username.
+- `%displayname%` : the player's display name (nickname, if they have one).
 
 ### Placeholders in `messages`
 
@@ -66,7 +66,7 @@ Available placeholders in these commands:
 ### Actionbar text
 
 `messages.group-create-blocked` is shown in the actionbar (not chat) the instant a player is kicked out of a
-group they just created. It's plain colored text with no chat prefix in front of it — it's meant to read as a
+group they just created. It's plain colored text with no chat prefix in front of it : it's meant to read as a
 standalone actionbar warning, not a chat message:
 
 ```yaml
