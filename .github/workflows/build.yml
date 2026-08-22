@@ -94,6 +94,13 @@ jobs:
               f.write(f"latest={latest_release}\n")
           PY
 
+      - name: Resolve Simple Voice Chat project ID
+        id: svc
+        run: |
+          ID=$(curl -sS https://api.modrinth.com/v2/project/simple-voice-chat | jq -r '.id')
+          echo "id=$ID" >> "$GITHUB_OUTPUT"
+          echo "Simple Voice Chat project id: $ID"
+
       - name: Set project version from tag
         run: mvn -B versions:set -DnewVersion="${{ steps.ver.outputs.version }}" -DgenerateBackupPoms=false
 
@@ -153,28 +160,65 @@ jobs:
 
           echo "subtitle=VoiceGroupCleaner ${VERSION} — MC ${MIN} to ${LATEST}" >> "$GITHUB_OUTPUT"
 
-      - name: Publish to Modrinth
+      - name: Publish each loader/version file to Modrinth
         if: startsWith(github.ref, 'refs/tags/') && (github.event_name == 'push' || inputs.publish)
-        uses: Kir-Antipov/mc-publish@v3.3
-        with:
-          modrinth-id: ${{ secrets.MODRINTH_PROJECT_ID }}
-          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          files: ${{ steps.pkg.outputs.src }}
-          name: ${{ steps.notes.outputs.subtitle }}
-          version: ${{ steps.ver.outputs.version }}
-          version-type: ${{ steps.ver.outputs.type }}
-          changelog: ${{ steps.notes.outputs.notes }}
-          loaders: |
-            paper
-            purpur
-            spigot
-            bukkit
-            folia
-          game-versions: ${{ steps.versions.outputs.list }}
-          dependencies: |
-            simple-voice-chat(required)
-          java: |
-            21
+        env:
+          MODRINTH_TOKEN: ${{ secrets.MODRINTH_TOKEN }}
+          MODRINTH_PROJECT_ID: ${{ secrets.MODRINTH_PROJECT_ID }}
+          SVC_PROJECT_ID: ${{ steps.svc.outputs.id }}
+          VERSION: ${{ steps.ver.outputs.version }}
+          VTYPE: ${{ steps.ver.outputs.type }}
+          CHANGELOG_TEXT: ${{ steps.notes.outputs.notes }}
+        run: |
+          FAIL=0
+          for FILE in dist/*.jar; do
+            BASENAME=$(basename "$FILE" .jar)
+            LOADER=$(echo "$BASENAME" | sed -E 's/^vgcleaner-([a-z]+)-.*/\1/')
+            MCVER=$(echo "$BASENAME" | sed -E 's/.*\+mc//')
+            NAME="VoiceGroupCleaner ${VERSION} (${LOADER} ${MCVER})"
+            VNUM="${VERSION}+mc${MCVER}-${LOADER}"
+
+            DATA=$(jq -n \
+              --arg name "$NAME" \
+              --arg version_number "$VNUM" \
+              --arg changelog "$CHANGELOG_TEXT" \
+              --arg version_type "$VTYPE" \
+              --arg loader "$LOADER" \
+              --arg gv "$MCVER" \
+              --arg project_id "$MODRINTH_PROJECT_ID" \
+              --arg svc_id "$SVC_PROJECT_ID" \
+              '{
+                name: $name,
+                version_number: $version_number,
+                changelog: $changelog,
+                dependencies: (if $svc_id == "" or $svc_id == "null" then [] else [{project_id: $svc_id, dependency_type: "required"}] end),
+                game_versions: [$gv],
+                version_type: $version_type,
+                loaders: [$loader],
+                featured: false,
+                status: "listed",
+                project_id: $project_id,
+                file_parts: ["file"]
+              }')
+
+            HTTP_CODE=$(curl -sS -o /tmp/resp.json -w "%{http_code}" -X POST "https://api.modrinth.com/v2/version" \
+              -H "Authorization: $MODRINTH_TOKEN" \
+              -F "data=$DATA;type=application/json" \
+              -F "file=@$FILE")
+
+            if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+              echo "OK   $LOADER  $MCVER"
+            else
+              echo "FAIL $LOADER  $MCVER  (HTTP $HTTP_CODE)"
+              cat /tmp/resp.json
+              FAIL=1
+            fi
+            sleep 0.3
+          done
+          if [ "$FAIL" -ne 0 ]; then
+            echo "One or more Modrinth uploads failed, see log above."
+            exit 1
+          fi
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
