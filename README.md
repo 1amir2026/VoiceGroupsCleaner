@@ -80,3 +80,8 @@ i am **1amir2026**. ( who actually started this )
     <a href="LICENSE">License</a>
   </sub>
 </div>
+
+
+---
+
+[![Made with love](https://raw.githubusercontent.com/1amir2026/VoiceGroupsCleaner/main/Gallery/about.png)](https://github.com/1amir2026)
