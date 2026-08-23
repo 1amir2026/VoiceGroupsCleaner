@@ -1,6 +1,6 @@
 <div align="center">
   <img src="Gallery/line_changed.gif" width="320">
-  <h1><img width="28" height="28" alt="image" src="https://github.com/user-attachments/assets/c35e9b16-60e7-45eb-8914-a590d08d378d" />    <img src="https://raw.githubusercontent.com/1amir2026/VoiceGroupsCleaner/main/Gallery/title.png" alt="VoiceGroupCleaner Plugin" width="400" style="vertical-align: middle; position: relative; top: 4px;"></h1>
+  <h1><img width="28" height="28" alt="image" src="https://github.com/user-attachments/assets/c35e9b16-60e7-45eb-8914-a590d08d378d" />    <img src="https://raw.githubusercontent.com/1amir2026/VoiceGroupsCleaner/main/Gallery/title.png" alt="VoiceGroupCleaner Plugin" width="400" style="vertical-align: middle; position: relative; top: 10px;"></h1>
   <p>&#8203;</p>
 </div>
  
